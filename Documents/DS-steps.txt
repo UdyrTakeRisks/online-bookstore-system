@@ -1,0 +1,50 @@
+
+DOCUMENT [README]
+
+
+Tools Verisons:
+
+mariadb --version     
+
+mariadb from 11.3.2-MariaDB, client 15.2 for Linux (x86_64) using readline 5.1
+
+java --version
+
+openjdk 21.0.2 2024-01-16
+OpenJDK Runtime Environment (build 21.0.2+13)
+OpenJDK 64-Bit Server VM (build 21.0.2+13, mixed mode, sharing)
+
+
+STEPS:
+
+1- you should start with importing the mysql database.
+
+mysql -u <username> -p <password> <database name> < bookstoredumpdb.sql 
+
+2- load mysql j connector mysql-connector-j-8.3.0.jar into your IDE
+
+
+3- open the source code
+
+
+4 - run MultiThreadedBookstore.java Server
+
+5 - run BookstoreClient.java
+
+
+6 - please sign up first
+
+7 - login with your credentials
+
+8 - use any features provided in the Menu
+
+9 - Note: No. 8 feature is for admin only, username = admin , password = admin123
+
+Assuming the there is only one admin in the system
+
+10 - please ensure in sumbit borrowing request  to send request or respond request 
+     with the valid tokens 
+     
+
+
+ 

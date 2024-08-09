@@ -1,0 +1,57 @@
+
+CREATE TABLE Users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255),
+    password VARCHAR(255) NOT NULL,
+    role ENUM('borrower', 'lender') 
+);
+
+
+CREATE TABLE Books (
+    book_id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    genre VARCHAR(100),
+    price DECIMAL(10, 2),
+    quantity INT,
+    lender_id INT,
+    borrower_id INT,
+    FOREIGN KEY (lender_id) REFERENCES Users(user_id),
+    FOREIGN KEY (borrower_id) REFERENCES Users(user_id)
+);
+
+ CREATE TABLE Requests (
+    request_id INT PRIMARY KEY AUTO_INCREMENT,
+    borrower_id INT,
+    lender_id INT,
+    book_id INT,
+    request_status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending',
+    FOREIGN KEY (borrower_id) REFERENCES Users(user_id),
+    FOREIGN KEY (lender_id) REFERENCES Users(user_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
+);
+ 
+ CREATE TABLE Chats (
+    chat_id INT PRIMARY KEY AUTO_INCREMENT,
+    request_id INT,
+    sender_id INT,
+    receiver_id INT,
+    message TEXT,
+    FOREIGN KEY (request_id) REFERENCES Requests(request_id), // broken
+    FOREIGN KEY (sender_id) REFERENCES Users(user_id),
+    FOREIGN KEY (receiver_id) REFERENCES Users(user_id)
+);
+
+
+CREATE TABLE Reviews (
+    review_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    book_id INT,
+    rating DOUBLE,
+    review_msg TEXT,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id),
+    CHECK (rating >= 0 AND rating <= 5)
+);
+
